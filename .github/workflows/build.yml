@@ -38,4 +38,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: cashier-app-release
+          # تم تعديل المسار هنا ليبدأ بـ c2/ لان البناء تم داخله
           path: c2/build/app/outputs/flutter-apk/app-release.apk
