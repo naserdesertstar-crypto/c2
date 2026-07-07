@@ -6,7 +6,9 @@ plugins {
 
 android {
     namespace = "com.example.c2"
-    compileSdk = flutter.compileSdkVersion
+    
+    // تم التحديث إلى 34 لحل مشكلة تعارض مكتبات AndroidX مع nfc_manager
+    compileSdk = 34
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -16,7 +18,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.c2"
+        applicationid = "com.example.c2"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         
@@ -45,4 +47,15 @@ kotlin {
 
 flutter {
     source = "../.."
+}
+
+// كود الخيار الثاني: لإجبار جميع المكتبات الفرعية (Plugins) على البناء باستخدام إصدار SDK 34
+subprojects {
+    afterEvaluate {
+        if (hasProperty("android")) {
+            extensions.configure<com.android.build.gradle.BaseExtension> {
+                compileSdkVersion(34)
+            }
+        }
+    }
 }
