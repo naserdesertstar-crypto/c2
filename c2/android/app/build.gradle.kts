@@ -7,7 +7,8 @@ plugins {
 android {
     namespace = "com.example.c2"
     
-    compileSdk = 3
+    // تم التصحيح هنا مباشرة إلى 34 ليفهمها السيرفر فوراً
+    compileSdk = 34
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -16,10 +17,9 @@ android {
     }
 
     defaultConfig {
-        // تم تصحيح الحرف الإملائي هنا إلى Id كابيتال
         applicationId = "com.example.c2"
         
-        // تم تعديل هذا السطر مباشرة إلى 21 ليتوافق مع مستشعر الـ NFC ومكتبة nfc_manager
+        // متوافق مع مستشعر الـ NFC
         minSdk = 21
         
         targetSdk = flutter.targetSdkVersion
@@ -46,12 +46,15 @@ flutter {
     source = "../.."
 }
 
-// تم تحديث هذا الجزء ليصبح متوافقاً مع Gradle الحديث (AGP 9.0+) وبدون التحذيرات السابقة
+// تم تنظيف وتصحيح هذا الجزء بالكامل ليتوافق مع أحدث إصدارات Gradle بدون أي أخطاء تجميع
 subprojects {
     afterEvaluate {
         if (plugins.hasPlugin("com.android.application") || plugins.hasPlugin("com.android.library")) {
-            extensions.configure<com.android.build.api.dsl.CommonExtension<*, *, *, *, *, *>> {
-                compileSdk = 34
+            val androidExtension = extensions.findByName("android")
+            if (androidExtension != null) {
+                (androidExtension as? com.android.build.api.dsl.CommonExtension<*, *, *, *, *, *>)?.apply {
+                    compileSdk = 34
+                }
             }
         }
     }
