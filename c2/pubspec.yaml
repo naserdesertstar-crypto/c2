@@ -6,9 +6,7 @@ version: 1.0.0+1
 environment:
   sdk: '>=3.0.0 <4.0.0'
 
-
 dependencies:
-  http: ^1.2.0
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.6
@@ -16,14 +14,9 @@ dependencies:
   firebase_database: ^11.2.0
   nfc_manager: ^3.3.0
   flutter_tts: ^4.1.0
-  http: ^1.2.0  # <--- أضف هذا السطر هنا بالضبط بنفس المحاذاة
-
-
-
-
+  http: ^1.2.0
 
 dev_dependencies:
-  http: ^1.2.0
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
