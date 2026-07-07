@@ -38,10 +38,13 @@ flutter {
     source = "../.."
 }
 
-subprojects {
+// الكود المعدل للوصول للإضافات الخارجية وإجبارها على إصدار 36
+rootProject.subprojects {
     afterEvaluate {
         if (plugins.hasPlugin("com.android.application") || plugins.hasPlugin("com.android.library")) {
-            setProperty("compileSdk", 36)
+            extensions.configure<com.android.build.gradle.BaseExtension> {
+                compileSdkVersion(36)
+            }
         }
     }
 }
