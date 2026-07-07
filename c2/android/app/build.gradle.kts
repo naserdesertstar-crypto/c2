@@ -41,7 +41,7 @@ flutter {
 subprojects {
     afterEvaluate {
         if (plugins.hasPlugin("com.android.application") || plugins.hasPlugin("com.android.library")) {
-            setProperty("compileSdk", 34)
+            setProperty("compileSdk", 36)
         }
     }
 }
