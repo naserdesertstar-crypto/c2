@@ -1,0 +1,41 @@
+name: Build Flutter APK Automatically
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Install Dependencies
+        run: |
+          cd c2
+          flutter pub get
+
+      - name: Build APK
+        run: |
+          cd c2
+          flutter build apk --release
+
+      - name: Upload APK Result
+        uses: actions/upload-artifact@v4
+        with:
+          name: cashier-app-release
+          path: c2/build/app/outputs/flutter-apk/app-release.apk
